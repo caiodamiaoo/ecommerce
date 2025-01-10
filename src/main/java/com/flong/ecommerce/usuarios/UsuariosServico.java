@@ -29,11 +29,13 @@ public class UsuariosServico {
 
     @Transactional
     public Usuarios cadastrarUsuario(UsuariosDto dto) {
-        try {
-            return usuariosRepositorio.save(toUsuarios(dto));
-        }
-        catch (Exception e){
+        if (validaEmail(dto.getEmail())) {
             throw new EntidadeExistenteException("Usuário já cadastrado");
         }
+        return usuariosRepositorio.save(toUsuarios(dto));
+    }
+
+    public boolean validaEmail(String email) {
+        return usuariosRepositorio.existsUsuariosByEmail(email);
     }
 }
