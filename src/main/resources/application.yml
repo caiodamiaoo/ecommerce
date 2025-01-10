@@ -6,6 +6,15 @@ spring:
     driver-class-name: org.postgresql.Driver
   application:
     name: ecommerce
+  security:
+    auth:
+      provider-url: http://localhost:8080
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          introspection-uri: http://localhost:8080/oauth2/introspect
+          client-id: ecommerce-backend
+          client-secret: teste123
   jpa:
     hibernate:
       ddl-auto: none
